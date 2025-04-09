@@ -1,17 +1,20 @@
 #include "pipex.h"
 
-void	ft_creat_pipe(int *fds, char *cmd1, char *cmd2)
+void	ft_creat_pipe(int *fds, char **argv, char **envp)
 {
-	int	pipefd[2];
-	int	pid;
+	int		pipefd[2];
+	int		pid;
+	char	**main_args[2];
 
+	main_args[0] = argv;
+	main_args[1] = envp;
 	pipe(pipefd);
 	pid = fork();
 	if (fds[0] != -2)
-		ft_case_one(pid, fds, pipefd);
+		ft_case_one(pid, fds, pipefd, main_args);
 	else
 	{
-		ft_case_two(pid, fds, pipefd);
+		ft_case_two(pid, fds, pipefd, main_args);
 	}
 	if (pid != 0)
 	{
@@ -21,7 +24,7 @@ void	ft_creat_pipe(int *fds, char *cmd1, char *cmd2)
 	}
 }
 
-void	ft_pipex(char **argv)
+void	ft_pipex(char **argv, char **envp)
 {
 	char	*file_in;
 	char	*file_ou;
@@ -43,13 +46,13 @@ void	ft_pipex(char **argv)
 		fds[1] = open(file_ou, O_CREAT | O_WRONLY, 0644);
 	else
 		fds[1] = open(file_ou, O_WRONLY);
-	ft_creat_pipe(fds, argv[2], argv[3]);
+	ft_creat_pipe(fds, argv, envp);
 }
 
-int	main(int argc, char **argv)
+int	main(int argc, char **argv, char **envp)
 {
 	if (argc != 5)
 		return (-1);
-	ft_pipex(argv);
+	ft_pipex(argv, envp);
 	return (0);
 }

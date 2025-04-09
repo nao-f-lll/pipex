@@ -29,14 +29,33 @@ void	ft_dup2(int fd, int std1, int pipefd, int std2)
 void	ft_close(int pipefd, int fd)
 {
 	close(pipefd);
-	close(fd);
+	if (fd > 0)
+		close(fd);
 }
 
-void	ft_exec(char *path, char **args)
+void	ft_free(char **args)
 {
-	char	*env[2];
+	int	i;
 
-	env[0] = "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin";
-	env[1] = NULL;
-	execve(path, args, env);
+	i = 0;
+	while (args[i])
+	{
+		free(args[i]);
+		i++;
+	}
+	free(args);
+}
+
+void	ft_exec(char *exe, char **args, char **envp)
+{
+	int		exe_in;
+	char	*env[1];
+	char	**paths;
+
+	paths = ft_get_paths(envp, exe);
+	exe_in = ft_get_correct_path(paths, exe);
+	env[0] = NULL;
+	if (execve(paths[exe_in], args, env) == -1)
+		ft_free(args);
+	ft_free(paths);
 }
