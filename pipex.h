@@ -22,6 +22,8 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 size_t	ft_strlen(const char *s);
 char	**ft_split_exe(const char *s, char c, char *exe);
 char	**ft_split(const char *s, char c);
+char	*ft_get_shell(char **envp);
+char	*ft_strrchr(const char *s, int c);
 size_t	ft_strlcat(char *dest, const char *src, size_t size);
 void	ft_free(char **str);
 int		ft_get_correct_path(char **paths, char *exe);

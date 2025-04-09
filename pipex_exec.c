@@ -1,5 +1,24 @@
 #include "pipex.h"
 
+char	*ft_get_shell(char **envp)
+{
+	int	i;
+	int	size;
+
+	i = 0;
+	while (envp[i])
+	{
+		if (ft_strncmp(envp[i], "SHELL", 5) == 0)
+		{
+			size = ft_strlen(envp[i]);
+			ft_strlcpy(envp[i], ft_strrchr(envp[i], '/') + 1, size);
+			return (envp[i]);
+		}
+		i++;
+	}
+	return (NULL);
+}
+
 char	*ft_clean_path(char *o_path)
 {
 	char	*c_path;
