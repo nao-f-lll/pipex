@@ -2,8 +2,9 @@
 
 char	*ft_get_shell(char **envp)
 {
-	int	i;
-	int	size;
+	int		i;
+	int		size;
+	char	*shell;
 
 	i = 0;
 	while (envp[i])
@@ -11,8 +12,9 @@ char	*ft_get_shell(char **envp)
 		if (ft_strncmp(envp[i], "SHELL", 5) == 0)
 		{
 			size = ft_strlen(envp[i]);
-			ft_strlcpy(envp[i], ft_strrchr(envp[i], '/') + 1, size);
-			return (envp[i]);
+			shell = malloc(sizeof(char *) + size);
+			ft_strlcpy(shell, ft_strrchr(envp[i], '/') + 1, size);
+			return (shell);
 		}
 		i++;
 	}

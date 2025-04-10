@@ -48,6 +48,7 @@ void	ft_pipex(char **argv, char **envp)
 		fds[1] = open(file_ou, O_CREAT | O_WRONLY, 0644);
 	else
 		fds[1] = open(file_ou, O_WRONLY | O_TRUNC);
+	free(shell);
 	ft_creat_pipe(fds, argv, envp);
 }
 
