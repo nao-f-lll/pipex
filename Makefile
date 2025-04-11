@@ -1,5 +1,5 @@
 CC      = cc
-CFLAGS  = -Wall -Wextra -Werror
+CFLAGS  = -Wall -Wextra -Werror -g
 
 NAME    = pipex
 SRCS    = pipex.c pipex_utils.c pipex_helpers.c pipex_io.c pipex_exec.c

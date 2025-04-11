@@ -1,6 +1,6 @@
 #include "pipex.h"
 
-void	ft_creat_pipe(int *fds, char **argv, char **envp)
+int	ft_creat_pipe(int *fds, char **argv, char **envp)
 {
 	int		pipefd[2];
 	int		pid;
@@ -20,11 +20,12 @@ void	ft_creat_pipe(int *fds, char **argv, char **envp)
 	{
 		ft_close(pipefd[1], fds[1]);
 		ft_close(pipefd[0], fds[0]);
-		while (wait(NULL) > 0);
+		return (ft_get_status(pid));
 	}
+	return (-1);
 }
 
-void	ft_pipex(char **argv, char **envp)
+int	ft_pipex(char **argv, char **envp)
 {
 	char	*file_in;
 	char	*file_ou;
@@ -49,13 +50,12 @@ void	ft_pipex(char **argv, char **envp)
 	else
 		fds[1] = open(file_ou, O_WRONLY | O_TRUNC);
 	free(shell);
-	ft_creat_pipe(fds, argv, envp);
+	return (ft_creat_pipe(fds, argv, envp));
 }
 
 int	main(int argc, char **argv, char **envp)
 {
 	if (argc != 5)
-		return (-1);
-	ft_pipex(argv, envp);
-	return (0);
+		return (1);
+	return (ft_pipex(argv, envp));
 }

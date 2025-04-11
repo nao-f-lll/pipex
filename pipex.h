@@ -9,8 +9,8 @@
 # include <stdlib.h>
 # include <stdio.h>
 
-void	ft_pipex(char **argv, char **envp);
-void	ft_creat_pipe(int *fds, char **argv, char **envp);
+int		ft_pipex(char **argv, char **envp);
+int		ft_creat_pipe(int *fds, char **argv, char **envp);
 void	ft_right_side(int *fds, int *pipefd, char *cmd, char **envp);
 void	ft_case_two(int pid, int *fds, int *pipefd, char ***main_args);
 void	ft_left_side(int *fds, int *pipefd, char *cmd, char **envp);
@@ -33,4 +33,5 @@ int		ft_get_correct_path(char **paths, char *exe);
 int		ft_check_file(char *file, int mode);
 int		ft_printf(const char *format, ...);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int		ft_get_status(int pid);
 #endif

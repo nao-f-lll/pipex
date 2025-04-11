@@ -66,6 +66,10 @@ void	ft_exec(char *exe, char **args, char **envp)
 		exit(127);
 	}
 	if (execve(paths[exe_in], args, envp) == -1)
+	{
 		ft_free(args);
+		exit(127);
+	}
 	ft_free(paths);
+	exit(0);
 }
