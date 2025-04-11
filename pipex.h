@@ -34,4 +34,5 @@ int		ft_check_file(char *file, int mode);
 int		ft_printf(const char *format, ...);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_get_status(int pid);
+int		ft_get_exit_code(char **argv, char **envp);
 #endif

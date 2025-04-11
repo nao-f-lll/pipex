@@ -22,7 +22,7 @@ int	ft_creat_pipe(int *fds, char **argv, char **envp)
 		ft_close(pipefd[0], fds[0]);
 		return (ft_get_status(pid));
 	}
-	return (-1);
+	return (1);
 }
 
 int	ft_pipex(char **argv, char **envp)
@@ -55,7 +55,11 @@ int	ft_pipex(char **argv, char **envp)
 
 int	main(int argc, char **argv, char **envp)
 {
+	int	status;
+
 	if (argc != 5)
 		return (1);
-	return (ft_pipex(argv, envp));
+	ft_pipex(argv, envp);
+	status = ft_get_exit_code(argv, envp);
+	return (status);
 }

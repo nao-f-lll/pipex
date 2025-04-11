@@ -30,3 +30,32 @@ int	ft_get_status(int pid)
 		return ((status >> 8) & 0xFF);
 	return (1);
 }
+
+int	ft_get_exit_code(char **argv, char **envp)
+{
+	int		exe_in;
+	int		status;
+	char	**paths;
+	char	**args;
+
+	status = ft_check_file(argv[4], 6);
+	if (status == -2)
+		return (1);
+	if (ft_strlen(argv[3]) != 0)
+	{
+		args = ft_split(argv[3], ' ');
+		paths = ft_get_paths(envp, args[0]);
+		exe_in = ft_get_correct_path(paths, args[0]);
+		if (exe_in == -1)
+			exe_in = 0;
+		if (access(paths[exe_in], X_OK) != 0)
+		{
+			ft_free(paths);
+			ft_free(args);
+			return (127);
+		}
+		ft_free(paths);
+		ft_free(args);
+	}
+	return (0);
+}
