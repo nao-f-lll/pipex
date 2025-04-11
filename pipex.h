@@ -7,7 +7,6 @@
 # include <sys/types.h>
 # include <errno.h>
 # include <stdlib.h>
-# include <stdio.h>
 
 int		ft_pipex(char **argv, char **envp);
 int		ft_creat_pipe(int *fds, char **argv, char **envp);
